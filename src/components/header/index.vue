@@ -4,7 +4,7 @@
         <div class="lift-wrap fll">
           <img src="../../imgs/logo.png" alt="">
         </div>
-        <router-link to="/login" class="right-wrap flr" v-show="isLogin">
+        <router-link to="/login" class="right-wrap flr" v-show="!this.$store.state.data.username">
           登录
         </router-link>
       </div>
@@ -25,7 +25,6 @@ export default {
   name: 'index',
   data () {
     return {
-      isLogin: false
     }
   },
   methods: {
@@ -53,19 +52,18 @@ export default {
       }
     },
     showHeader () {
-      if (this.$route.name === 'newsDetail') {
-        return false
-      } else {
-        console.log(this.$route.name)
-        return true
+      switch (this.$route.name) {
+        case 'newsDetail':
+          return false
+        case 'userInfo':
+          return false
+        default:
+          return true
       }
     }
   },
   created () {
     console.log(this.$route)
-    if (this.$store.state.username) {
-      this.isLogin = true
-    }
   }
 }
 </script>

@@ -3,16 +3,18 @@
     v-infinite-scroll="loadMore"
     infinite-scroll-disabled="loading"
     :infinite-scroll-distance="100">
-    <div>
-      <div class="list-wrap clearfix">
-        <div v-for="(item, index) in data" :key="index" class="list-item fll">
-          <img :src="item.pic">
-          <div class="item-bottom">{{item.title}}</div>
+    <div class="list-wrap">
+      <div v-for="(item, index) in data" :key="index" class="list-item">
+      <!--<div class="list-item">-->
+        <div class="item-left">
+          <div class="item-left-top">{{item.typeName}}</div>
+          <div class="item-left-bottom">{{item.timeFormat}}</div>
         </div>
+        <div class="item-right">+{{item.singleDesc}}</div>
       </div>
-      <div v-show="allLoaded" class="bottom">
-        没有更多数据了
-      </div>
+    </div>
+    <div v-show="allLoaded" class="bottom">
+      没有更多数据了
     </div>
   </div>
 </template>
@@ -36,7 +38,7 @@ export default {
         text: '内容加载中...',
         spinnerType: 'double-bounce'
       })
-      this.$axios.get(`news/newsList.do?page=${this.page}&rows=${this.rows}&type=7`).then(res => {
+      this.$axios.get(`/integral/integralList.do?page=${this.page}&rows=${this.rows}`).then(res => {
         Indicator.close()
         this.data = [
           ...this.data,
@@ -61,38 +63,34 @@ export default {
 </script>
 
 <style lang="scss">
-  /*.list-wrap{*/
-    /*display: flex;*/
-    /*flex-flow: row;*/
-    /*width: 100%;*/
-  /*}*/
   .list-item{
-    flex: 1;
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
     background: #fff;
-    width: 3.1rem;
-    height: 3.2rem;
+    height: 1.6rem;
+    border-bottom: .02rem solid rgb(221, 221, 221);
     padding: .32rem;
+    box-sizing: border-box;
+    position: relative;
     font-size: .32rem;
     font-weight: 400;
 
-    img{
-      width: 3.1rem;
-      height: 2.4rem;
+    .item-right{
+      position: absolute;
+      right: .2rem;
+      color: red;
     }
-    .item-bottom{
-      color: #666;
-      width: 3.1rem;
-      height: .74rem;
-      font-size: .26rem;
-      line-height: 1.5;
-      white-space: normal;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
+
+    .item-left{
+      line-height: .4rem;
+      .item-left-top{
+        margin-bottom: .1rem;
+        font-size: .36rem;
+      }
+
+      .item-left-bottom{
+        font-size: .28rem;
+      }
     }
   }
 

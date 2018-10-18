@@ -25,7 +25,11 @@ let components = {
   LifeChoice: () => import('../views/LifeChoice/index'),
   discuss: () => import('../views/discuss/index'),
   Members: () => import('../views/Members/index'),
-  today: () => import('../views/today/index')
+  today: () => import('../views/today/index'),
+  scoredetail: () => import('../views/scoredetail/index'),
+  interaction: () => import('../views/interaction/index'),
+  interactionDetail: () => import('../views/interactionDetail/index'),
+  personalsummary: () => import('../views/personalsummary/index')
 }
 
 export default new Router({
@@ -226,6 +230,38 @@ export default new Router({
         title: '参评党员'
       },
       component: components.Members
+    },
+    {
+      path: '/scoredetail',
+      name: 'scoredetail',
+      meta: {
+        title: '积分明细'
+      },
+      component: components.scoredetail
+    },
+    {
+      path: '/interaction',
+      name: 'interaction',
+      meta: {
+        title: '党员云互动'
+      },
+      component: components.interaction
+    },
+    {
+      path: '/interactionDetail/:id',
+      name: 'interactionDetail',
+      meta: {
+        title: '党员云互动'
+      },
+      component: components.interactionDetail
+    },
+    {
+      path: '/personalsummary',
+      name: 'personalsummary',
+      meta: {
+        title: '个人总结'
+      },
+      component: components.personalsummary
     }
   ]
 })

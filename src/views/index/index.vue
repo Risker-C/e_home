@@ -33,7 +33,7 @@
                 <div>掌上组织生活</div>
             </div>
           </router-link>
-          <router-link :to=" isLogin ? '/????' : '/login'">
+          <router-link :to=" isLogin ? '/interaction' : '/login'">
             <div class="line">
                 <img src="../../imgs/icon_05.png">
                 <div>党员云互动</div>
