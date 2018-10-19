@@ -47,12 +47,13 @@ export default {
         this.$axios.get(`/user/updatePwd.do?newPwd=${formData.newpass}&oldPwd=${formData.oldpass}`).then(res => {
           console.log(res)
           this.isDisable = !this.isDisable
-          if (res.code === 0) {
-            Toast(res.msg)
-            // this.$router.push('/login')
+          if (res.code === 1) {
+            Toast(res.msg + '，请重新登录')
+            setTimeout(() => {
+              this.$router.push('/login')
+            }, 1000)
           } else {
             Toast(res.msg)
-            // this.$router.back()
           }
         })
       }

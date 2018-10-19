@@ -5,7 +5,7 @@
     infinite-scroll-disabled="isOver"
     infinite-scroll-distance="10"
   >
-    <div class="user-row" v-for="(item, index) in this.data" :key="index">
+    <div class="user-row" v-for="(item, index) in this.data" :key="index" @click="handleClick(item)">
       <div class="row-img">
         <img :src="item.header">
       </div>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { Indicator } from 'mint-ui'
+import { Indicator, Toast } from 'mint-ui'
 export default {
   data () {
     return {
@@ -52,6 +52,12 @@ export default {
         this.page++
         this.getData()
       }
+    },
+    handleClick (item) {
+      console.log(item)
+      this.$axios.get(`/nationComment/isComment.do?user_id=${sessionStorage.getItem('token')}&other_user_id=${item.id}&id=CEBBD1A4FF2147C8B9ED0CEA6AE90BCF&comment_id=CEBBD1A4FF2147C8B9ED0CEA6AE90BCF`).then(res => {
+        Toast(res.msg)
+      })
     }
   },
   created () {

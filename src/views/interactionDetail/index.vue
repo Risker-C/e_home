@@ -83,7 +83,7 @@ export default {
     },
     addComment () {
       console.log(this.text)
-      var formData = new FormData()
+      let formData = new FormData()
       formData.append('forum_id', this.userList.id)
       formData.append('comment', this.text)
       console.log(this.userList)
@@ -91,6 +91,7 @@ export default {
         this.text = ''
         this.page = 1
         this.getData()
+        this.data = {}
         Toast(res.data.msg)
       }).catch(err => {
         console.log(err)
@@ -107,11 +108,6 @@ export default {
 
 <style scoped lang="scss">
   .main{
-    /*position: fixed;*/
-    /*bottom: 0;*/
-    /*right: 0;*/
-    /*left: 0;*/
-    /*top: 0;*/
     background: rgb(239, 239, 244);
     width: 100%;
     box-sizing: border-box;

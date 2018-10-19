@@ -1,7 +1,7 @@
 <template>
   <div
     v-infinite-scroll="loadMore"
-    infinite-scroll-disabled="loading"
+    :infinite-scroll-disabled="loading"
     :infinite-scroll-distance="100">
     <div>
       <div class="list-wrap clearfix">
@@ -44,14 +44,17 @@ export default {
         ]
         if (res.rows.length !== this.rows) {
           this.allLoaded = true // 若数据已全部获取完毕
+          this.loading = false
         }
       })
     },
     loadMore () {
-      this.page = this.page + 1
-      this.loading = true
-      this.getData()
-      this.loading = false
+      if (!this.allLoaded) {
+        this.page = this.page + 1
+        this.loading = true
+        this.getData()
+        this.loading = false
+      }
     }
   },
   created () {
@@ -61,11 +64,6 @@ export default {
 </script>
 
 <style lang="scss">
-  /*.list-wrap{*/
-    /*display: flex;*/
-    /*flex-flow: row;*/
-    /*width: 100%;*/
-  /*}*/
   .list-item{
     flex: 1;
     display: flex;
