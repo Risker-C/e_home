@@ -59,14 +59,14 @@ export default {
   methods: {
     loginOut () {
       this.$store.commit('logout')
-      sessionStorage.removeItem('token')
+      localStorage.removeItem('token')
       this.isLogin = false
     }
   },
   created () {
     const data = this.$store.state.data
-    console.log(data)
-    if (data.username) {
+    // console.log(data)
+    if (localStorage.getItem('token')) {
       this.isLogin = true
       this.userInfo = data
     }

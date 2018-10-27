@@ -62,7 +62,7 @@ export default {
         spinnerType: 'double-bounce'
       })
       this.$axios.get('/news/newsList.do?page=1&rows=10&type=2').then(res => {
-        console.log(res)
+        // console.log(res)
         this.data = [
           ...this.data,
           ...res.rows
@@ -84,7 +84,7 @@ export default {
     // 上拉加载更多
     loadBottom () {
       this.page = this.page + 1
-      console.log(this.page)
+      // console.log(this.page)
       this.getData()
       this.$refs.loadmore.onBottomLoaded()
     }

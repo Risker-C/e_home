@@ -48,13 +48,13 @@ export default {
     },
     loadMore () {
       if (!this.isOver) {
-        console.log(this.isOver)
+        // console.log(this.isOver)
         this.page++
         this.getData()
       }
     },
     handleClick (item) {
-      console.log(item)
+      // console.log(item)
       this.$axios.get(`/nationComment/isComment.do?user_id=${sessionStorage.getItem('token')}&other_user_id=${item.id}&id=CEBBD1A4FF2147C8B9ED0CEA6AE90BCF&comment_id=CEBBD1A4FF2147C8B9ED0CEA6AE90BCF`).then(res => {
         Toast(res.msg)
       })

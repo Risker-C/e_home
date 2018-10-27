@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     open (index) {
-      console.log('????')
+      // console.log('????')
       switch (index) {
         case 1:
           this.popupVisible = true

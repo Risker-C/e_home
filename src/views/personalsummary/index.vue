@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     addImg (event) {
-      console.log(this.$refs.inputer)
+      // console.log(this.$refs.inputer)
       var file = this.$refs.inputer.files[0]
       let url = window.webkitURL.createObjectURL(file)
       this.imgs.push(url)
@@ -45,20 +45,20 @@ export default {
     upLoadImg () {
       let formdata = new FormData()
       formdata.append('myFile', this.file)
-      console.log(formdata)
+      // console.log(formdata)
       this.$axios.post('/image/uploadBase64.do', formdata, {ContentType: 'application/x-www-form-urlencoded'}).then(res => {
         this.upImgs.push(res.url)
       })
     },
     handleUpload () {
-      console.log(this.imgs)
+      // console.log(this.imgs)
       let formData = new FormData()
       formData.append('pic_list', this.imgs)
       formData.append('comment_id', 0)
       formData.append('user_id', sessionStorage.getItem('token'))
       // console.log(formData.get('pic_list'))
       this.$axios.post('/nationComment/submitSummary.do', formData, {ContentType: 'application/x-www-form-urlencoded'}).then(res => {
-        console.log(res)
+        // console.log(res)
         Toast(res.data.msg)
       })
     }

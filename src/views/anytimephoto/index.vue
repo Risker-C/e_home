@@ -63,17 +63,23 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+  .list-wrap{
+    background: #fff;
+  }
   .list-item{
+    border-color: transparent;
     flex: 1;
     display: flex;
     flex-flow: column;
     background: #fff;
-    width: 3.1rem;
-    height: 3.2rem;
+    width: 3.74rem;
+    height: 3.79rem;
     padding: .32rem;
     font-size: .32rem;
     font-weight: 400;
+    box-sizing: border-box;
+    margin: 0;
 
     img{
       width: 3.1rem;

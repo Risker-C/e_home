@@ -1,17 +1,27 @@
 import axios from 'axios'
-let token = sessionStorage.getItem('token')
-axios.defaults.headers.common['token'] = token
+
 const instance = axios.create({
   timeout: '15000',
-  baseURL: '/hhdj'
+  baseURL: 'http://211.67.177.56:8080/hhdj'
 })
+
+function getToken () {
+  let token = localStorage.getItem('token')
+  if (token) {
+    axios.defaults.headers.common['token'] = token.toString()
+  }
+}
 
 const getData = {
   get (url, data, config) {
+    getToken()
     return new Promise((resolve, reject) => {
       instance.get(url, {
         params: data
       }, config).then(res => {
+        if (res.data.code === 403) {
+          localStorage.setItem('token', '')
+        }
         resolve(res.data)
       }).catch(err => {
         reject(err)
@@ -19,8 +29,12 @@ const getData = {
     })
   },
   send (url, data, config, type) {
+    getToken()
     return new Promise((resolve, reject) => {
       instance[type](url, data, config).then(res => {
+        if (res.data.code === 403) {
+          localStorage.setItem('token', '')
+        }
         resolve(res)
       }).catch(err => {
         reject(err)

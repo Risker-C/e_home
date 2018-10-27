@@ -27,7 +27,7 @@
                 <div>信工新闻眼</div>
             </div>
           </router-link>
-          <router-link to="/life">
+          <router-link :to=" isLogin ? '/life' : '/login'">
             <div class="line">
                 <img src="../../imgs/icon_03.png">
                 <div>掌上组织生活</div>
@@ -106,7 +106,7 @@ export default {
   },
   methods: {
     callback (event) {
-      console.log(event)
+      // console.log(event)
     },
     jump (url) {
       this.$router.push(`/newsDetail/${url}`)
@@ -119,7 +119,7 @@ export default {
         this.imgUrls = res.rows.map(index => index.imgUrl)
       }
     })
-    if (this.$store.state.data.username) {
+    if (localStorage.getItem('token')) {
       this.isLogin = true
     }
   }
@@ -200,7 +200,7 @@ export default {
 
    .footer-btn-wrap{
      height: 3.3rem;
-     background: url("../../imgs/专栏.png");
+     background: url("../../imgs/special.png");
      background-size: 100% 100%;
      display: flex;
 

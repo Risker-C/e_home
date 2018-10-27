@@ -34,7 +34,7 @@ export default {
         spinnerType: 'double-bounce'
       })
       this.$axios.get(`/news/newsContent.do?newsId=${this.id}`).then(res => {
-        console.log(res)
+        // console.log(res)
         this.data = res.data
         this.content = res.data.content
         Indicator.close()
@@ -68,7 +68,7 @@ export default {
     }
   },
   created () {
-    console.log(this.$route.params.id)
+    // console.log(this.$route.params.id)
     this.id = this.$route.params.id
     this.getData()
   }

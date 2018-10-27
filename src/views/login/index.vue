@@ -43,7 +43,7 @@ export default {
           // 如果登录成功，将数据存入vuex,并返回上一页面
           if (res.data.code === 1) {
             this.$store.commit('login', res.data.data)
-            sessionStorage.setItem('token', res.data.token)
+            localStorage.setItem('token', res.data.token)
             Toast(res.data.msg)
             this.$router.back()
           } else {

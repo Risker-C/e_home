@@ -82,11 +82,11 @@ export default {
       this.loading = false
     },
     addComment () {
-      console.log(this.text)
+      // console.log(this.text)
       let formData = new FormData()
       formData.append('forum_id', this.userList.id)
       formData.append('comment', this.text)
-      console.log(this.userList)
+      // console.log(this.userList)
       this.$axios.post('/forum/addComment.do', formData, {ContentType: 'application/x-www-form-urlencoded'}).then(res => {
         this.text = ''
         this.page = 1
@@ -94,7 +94,7 @@ export default {
         this.data = {}
         Toast(res.data.msg)
       }).catch(err => {
-        console.log(err)
+        // console.log(err)
         Toast(err.msg)
       })
     }

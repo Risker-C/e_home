@@ -9,18 +9,18 @@
     class="more">
     <div class="list-wrap">
       <div v-for="(item, index) in data" :key="index" class="list-item" @click="jump(item.newsId)">
-        <div class="item-left fll">
+        <div class="item-left">
           <img :src="item.pic">
         </div>
-        <div class="item-right flr">
+        <div class="item-right">
           <div class="item-right-top">
             {{item.title}}
           </div>
           <div class="item-right-bottom">
-            <div class="item-time fll">
+            <div class="item-time">
               {{item.currentTime}}
             </div>
-            <div class="item-watch flr">
+            <div class="item-watch">
               <img src="../../imgs/12-eye.png">
               <span>{{item.count}}</span>
             </div>
@@ -84,7 +84,7 @@ export default {
         spinnerType: 'double-bounce'
       })
       this.$axios.get(`/news/newsList.do?page=${this.page}&rows=${this.rows}&type=${this.type}`).then(res => {
-        console.log(res)
+        // console.log(res)
         this.data = [
           ...this.data,
           ...res.rows
@@ -109,7 +109,7 @@ export default {
     // 上拉加载更多
     loadBottom () {
       this.page = this.page + 1
-      console.log(this.page)
+      // console.log(this.page)
       this.getData()
       this.$refs.loadmore.onBottomLoaded()
     }
@@ -117,21 +117,23 @@ export default {
   created () {
     this.selectType()
     this.getData()
-    console.log(this.type)
+    // console.log(this.type)
   }
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
   .list-item{
     display: flex;
     flex-flow: row;
     background: #fff;
     height: 2rem;
+    width: 100%;
     border-bottom: .02rem solid rgb(221, 221, 221);
     padding: .2rem .2rem .2rem 2rem;
     box-sizing: border-box;
     position: relative;
+    color: #333333;
 
     .item-left{
       position: absolute;
@@ -146,16 +148,26 @@ export default {
     .item-right{
       font-size: .32rem;
       font-weight: 500;
+      height: 1.58rem;
+      margin-left: .2rem;
+      position: relative;
 
       .item-right-top{
+        width: 5.12rem;
         height: .96rem;
+        color: #333;
         line-height: .48rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;//自适应布局
+        -webkit-line-clamp: 2;//省略号显示在第几行
+        -webkit-box-orient: vertical;//文字水平向右
       }
 
       .item-right-bottom{
         width: 5.3rem;
         position: absolute;
-        top: 1.55rem;
+        top: 1.2rem;
         font-size: .20rem;
         font-weight: 400;
         line-height: .24rem;
@@ -165,7 +177,11 @@ export default {
   }
 
   .item-watch{
+    position: absolute;
+    right: .2rem;
+    top: 0;
     img{
+      width: .38rem;
       height: .24rem;
       margin-right: .1rem;
     }

@@ -4,7 +4,7 @@
         <div class="lift-wrap fll">
           <img src="../../imgs/logo.png" alt="">
         </div>
-        <router-link to="/login" class="right-wrap flr" v-show="!this.$store.state.data.username">
+        <router-link to="/login" class="right-wrap flr" v-show="!isLogin">
           登录
         </router-link>
       </div>
@@ -25,6 +25,7 @@ export default {
   name: 'index',
   data () {
     return {
+      isLogin: false
     }
   },
   methods: {
@@ -63,7 +64,18 @@ export default {
     }
   },
   created () {
-    console.log(this.$route)
+    // console.log(this.$route)
+  },
+  watch: {
+    $route () {
+      if (this.$route.name === 'index') {
+        if (localStorage.getItem('token')) {
+          this.isLogin = true
+        } else {
+          this.isLogin = false
+        }
+      }
+    }
   }
 }
 </script>

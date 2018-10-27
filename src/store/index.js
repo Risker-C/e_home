@@ -10,7 +10,6 @@ const store = new Vuex.Store({
   mutations: {
     login (state, data) {
       state.data = data
-      console.log(data)
     },
     logout (state) {
       state.data = {}
@@ -19,9 +18,9 @@ const store = new Vuex.Store({
   // 数据持久化
   plugins: [createPersistedState({
     storage: {
-      getItem: key => sessionStorage.getItem(key),
-      setItem: (key, value) => sessionStorage.setItem(key, value),
-      removeItem: key => sessionStorage.removeItem(key)
+      getItem: key => localStorage.getItem(key),
+      setItem: (key, value) => localStorage.setItem(key, value),
+      removeItem: key => localStorage.removeItem(key)
     }
   })]
 })
